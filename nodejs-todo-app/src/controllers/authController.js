@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 // Sign up
 exports.signup = async (req, res) => {
     const { username, password } = req.body;
+    console.log("asdasds")
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, password: hashedPassword });
     await user.save();
@@ -14,6 +15,8 @@ exports.signup = async (req, res) => {
 // Login
 exports.login = async (req, res) => {
     const { username, password } = req.body;
+
+    console.log("login")
     const user = await User.findOne({ username });
     if (!user) {
         return res.status(400).send('Invalid credentials');
